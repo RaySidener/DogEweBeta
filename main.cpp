@@ -9,7 +9,13 @@
 using namespace std;
 
 int main(){
-  cout<<"hello math";
+  const int size = 2;
+  float** mat;
+  mat = new float*[size];
+  makeMatrix(mat, size);
+
+  rref(mat);
+  printMat(mat,size);
   add(0,2);
   return 0;
 }
