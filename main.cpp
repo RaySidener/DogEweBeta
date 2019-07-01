@@ -14,8 +14,8 @@ int main(){
   mat = new float*[size];
   makeMatrix(mat, size);
 
-  rref(mat);
+  rref(mat, size);
   printMat(mat,size);
-  add(0,2);
+  printMat(rref(mat, size), size);
   return 0;
 }
