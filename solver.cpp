@@ -1,9 +1,11 @@
+#include "matrix.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <cmath>
 
-using namespace std;
+//using namespace std;
 
 //returns the rref of matrix
 float** rref(float** matrix, int size){
@@ -26,6 +28,8 @@ float** rref(float** matrix, int size){
       }
     }
   }
+
+  //cout<<isID(matrix, size);
   //while(!(isID(lMat))){
     //note: won't use methods from solver.cpp in solver.cpp, so
     //above line won't work. here, we'll do the same moves/multiplies/adds
@@ -38,19 +42,19 @@ float** rref(float** matrix, int size){
 }
 
 //returns true if it's I
-bool isID(float** matrix, int size){
-  for(int i =0; i<size; i++){
-    for(int j=0; j<size; j++){
-      if(i==j && matrix[i][j]!=1.0){
-        return false;
-      }
-      if(i!=j && matrix[i][j]!=0){
-        return false;
-      }
-    }
-  }
-  return true;
-}
+// bool isID(float** matrix, int size){
+//   for(int i =0; i<size; i++){
+//     for(int j=0; j<size; j++){
+//       if(i==j && matrix[i][j]!=1.0){
+//         return false;
+//       }
+//       if(i!=j && matrix[i][j]!=0){
+//         return false;
+//       }
+//     }
+//   }
+//   return true;
+// }
 
 //sets up 2d array size x size matrix
 //and initializes it to I
