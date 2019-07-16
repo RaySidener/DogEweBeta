@@ -10,12 +10,13 @@ using namespace std;
 class Matrix {
 
 public:
-
+  Matrix::Matrix();
+  void Matrix::hello();
 
 
 private:
-  float** matrix;
-  int size;
+   //float** matrix;
+   //int size;
 
 
-}
+};

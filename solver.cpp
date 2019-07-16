@@ -5,8 +5,12 @@
 #include <string>
 #include <cmath>
 
-//using namespace std;
-
+void helloSolver(){
+  cout<<"hello from solver.cpp"<<endl;
+  Matrix* a = new Matrix();
+  a->hello();
+}
+/*
 //returns the rref of matrix
 float** rref(float** matrix, int size){
   float** lMat;
@@ -89,3 +93,4 @@ int add(int a, int b){
   cout<<"we out here";
   return a+b;
 }
+*/
