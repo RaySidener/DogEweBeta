@@ -7,12 +7,39 @@
 
 using namespace std;
 
-Matrix::Matrix(){
-cout<<"in constructor, made matrix"<<endl;
+Matrix::Matrix(int size){
+  m_size = size;
+
+  for(int i = 0; i<size; i++){
+    m_matrix[i] = new float[size];
+  }
+  for(int j = 0; j<size;j++){
+    for(int k = 0; k< size; k++){
+      m_matrix[j][k] = 0;
+      if(j==k){
+        m_matrix[j][k] = 1;
+      }
+    }
+  }
+
+cout<<"Successfully made " <<endl;//<<size<<"x"<<size<<" matrix."<<endl;
 }
 
 void Matrix::hello(){
   cout<<"hello from matrix.cpp"<< endl;
+}
+
+void Matrix::printMat(){
+cout<<"in printmat"<<endl;
+  cout<<"Matrix: "<< endl;
+  cout<< "{";
+  for (int i = 0; i<m_size; i++){
+    for(int j = 0; j<m_size; j++){
+      cout<<m_matrix[i][j] <<", ";
+    }
+    cout<<""<<endl;
+  }
+  cout<<"}"<< endl;
 }
 
 

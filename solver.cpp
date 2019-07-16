@@ -7,8 +7,9 @@
 
 void helloSolver(){
   cout<<"hello from solver.cpp"<<endl;
-  Matrix* a = new Matrix();
+  Matrix* a = new Matrix(2);
   a->hello();
+  a->printMat();
 }
 /*
 //returns the rref of matrix
