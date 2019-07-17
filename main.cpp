@@ -1,6 +1,8 @@
 #include "solver.cpp"
 #include "matrix.h"
 #include "matrix.cpp"
+#include "equation.h"
+#include "equation.cpp"
 
 #include <iostream>
 #include <fstream>
@@ -11,7 +13,6 @@
 using namespace std;
 
 int main(){
-  int x = getInputSize();
-//  helloSolver();
+  solveEquation();
   return 0;
 }
