@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//initializes m_size and m_matrix to ID
 Matrix::Matrix(int size){
   m_size = size;
   m_matrix = new float*[size];
@@ -70,12 +71,28 @@ bool Matrix::isID(){
   return true;
 }
 
+
+//sets the matrix to val at mat[row][col]
+//if called with no params, sets to ID
 void Matrix::setMat(int row, int col, float val){
   if (row != -1){
     m_matrix[row][col] = val;
   }
+  else {
+    for(int i = 0;i<m_size; i++){
+      for(int j = 0; j<m_size; j++){
+        m_matrix[i][j] = 0;
+        if(i==j){
+          m_matrix[i][j] = 1;
+        }
+      }
+    }
+  }
 }
 
+//mulitplies row 'row' by k
+//if the 3rd param is included, save result in arr
+//otherwise, modify m_matrix
 void Matrix::byConst(int row, float k, float* arr){
   if(arr==NULL){
     for(int i = 0; i<m_size; i++){
@@ -91,6 +108,7 @@ void Matrix::byConst(int row, float k, float* arr){
   }
 }
 
+//swaps the contents of row1 and row2 in m_matrix
 void Matrix::swapRow(int row1, int row2){
   float temp;
   for(int i = 0; i<m_size; i++){
@@ -108,6 +126,8 @@ void Matrix::swapCol(int col1, int col2){
 
 //returns the rref of matrix
 float** Matrix::rref(){
+  //what's the best way to do this? can I actually straight up just
+  //make two new matrices, ie by calling the constructor?
   float** lMat;
   lMat = new float*[m_size];
   float** rMat;
