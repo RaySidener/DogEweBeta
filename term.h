@@ -12,11 +12,12 @@ class Term {
   public:
     Term::Term(string t);
     void Term::printTerm();
+    float getCoefficient(){return coefficient;}
 
     string m_term;
     char varName;
-    float coefficient;//coefficient of term not including +/-
     bool isNegative;
   private:
+    float coefficient;//coefficient of term not including +/-
 
 };

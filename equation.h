@@ -13,9 +13,13 @@ class Equation {
   public:
     Equation::Equation(string eq, int size);
     void Equation::printEq();
+    Term** getTerms(){return m_terms;}
+
+
 
   private:
     int m_size; //number of variables in equation
-    Term** m_terms;
     string m_eq; //string of the equation
+    Term** m_terms;
+
 };

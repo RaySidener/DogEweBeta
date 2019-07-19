@@ -39,7 +39,18 @@ void helloSolver(){
 
 void solveEquation(){
   int size = getInputSize();
+  Equation** eqs = new Equation*[size];
   for(int i = 0; i< size; i++){
     Equation* x = new Equation(getInputEQ(), size);
+    eqs[i] = x;
   }
+  float val;
+  Matrix* co = new Matrix(size);
+  for(int r = 0; r<size; r++){
+    for(int c = 0; c<size; c++){
+      val = eqs[r]->getTerms()[c]->getCoefficient();
+      co->setMat(r, c, val);
+    }
+  }
+  co->printMat();
 }
