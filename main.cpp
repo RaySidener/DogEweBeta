@@ -3,6 +3,8 @@
 #include "matrix.cpp"
 #include "equation.h"
 #include "equation.cpp"
+#include "term.h"
+#include "term.cpp"
 
 #include <iostream>
 #include <fstream>

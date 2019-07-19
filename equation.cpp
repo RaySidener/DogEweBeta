@@ -1,4 +1,5 @@
 #include "equation.h"
+#include "term.h"
 
 #include <iostream>
 #include <fstream>
@@ -12,12 +13,21 @@ Equation::Equation(string eq, int size){
 
   m_eq = eq;
   m_size = size;
-  vars = new char[m_size];
-  vals = new float[m_size];
-  //TODO: parse through input string and populate arrays
-  //are these arrays the best way to do this? or is there a better way?
-  for(int i = 0; i < m_eq.length(); i++){
-    cout<<m_eq.at(i);
+  m_terms = new Term*[m_size];
+  int frm = 0;
+  int to = 0;
+  int count = 0;
+  while(to<eq.length()){
+    if(eq.at(to)=='+'||eq.at(to)=='-'){
+      m_terms[count] = new Term(eq.substr(frm, to-frm));
+      count++;
+      frm = to;
+    }
+    else if(eq.at(to)=='='){
+      m_terms[count] = new Term(eq.substr(frm, to-frm));
+      count++;
+    }
+    to++;
   }
 }
 

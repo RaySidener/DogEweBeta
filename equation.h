@@ -1,5 +1,6 @@
 #pragma once
 
+#include "term.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -15,7 +16,6 @@ class Equation {
 
   private:
     int m_size; //number of variables in equation
-    char* vars; //array of variables
-    float* vals; //array of values corresponding with variables
+    Term** m_terms;
     string m_eq; //string of the equation
 };

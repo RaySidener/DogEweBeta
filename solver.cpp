@@ -1,5 +1,7 @@
 #include "matrix.h"
 #include "equation.h"
+#include "term.h"
+
 
 #include <iostream>
 #include <fstream>
@@ -38,6 +40,6 @@ void helloSolver(){
 void solveEquation(){
   int size = getInputSize();
   for(int i = 0; i< size; i++){
-    getInputEQ();
+    Equation* x = new Equation(getInputEQ(), size);
   }
 }

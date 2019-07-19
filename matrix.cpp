@@ -14,15 +14,15 @@ Matrix::Matrix(int size){
   for(int i = 0; i<size; i++){
     m_matrix[i] = new float[size];
   }
-  for(int j = 0; j<size;j++){
-    for(int k = 0; k< size; k++){
-      m_matrix[j][k] = 0;
-      if(j==k){
-        m_matrix[j][k] = 1;
-      }
-    }
-  }
-
+  // for(int j = 0; j<size;j++){
+  //   for(int k = 0; k< size; k++){
+  //     m_matrix[j][k] = 0;
+  //     if(j==k){
+  //       m_matrix[j][k] = 1;
+  //     }
+  //   }
+  // }
+  setMat();
 cout<<"Successfully made " <<endl;//<<size<<"x"<<size<<" matrix."<<endl;
 }
 
