@@ -26,8 +26,9 @@ string getInputEQ(){
 
 void helloSolver(){
   cout<<"hello from solver.cpp"<<endl;
-  Matrix* a = new Matrix(3);
-  a->hello();
+  Matrix* a = new Matrix(6,2);
+  a->printMat();
+//  a->hello();
 }
 
 
@@ -45,12 +46,15 @@ void solveEquation(){
     eqs[i] = x;
   }
   float val;
-  Matrix* co = new Matrix(size);
+  Matrix* co = new Matrix(size, size+1);
   for(int r = 0; r<size; r++){
     for(int c = 0; c<size; c++){
       val = eqs[r]->getTerms()[c]->getCoefficient();
       co->setMat(r, c, val);
     }
+  }
+  for(int k = 0; k<size; k++){
+    co->setMat(k,size, eqs[k]->con);
   }
   co->printMat();
 }

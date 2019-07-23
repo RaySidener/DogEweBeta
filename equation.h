@@ -14,6 +14,7 @@ class Equation {
     Equation::Equation(string eq, int size);
     void Equation::printEq();
     Term** getTerms(){return m_terms;}
+    float con;
 
 
 

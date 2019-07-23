@@ -8,22 +8,25 @@
 using namespace std;
 
 //initializes m_size and m_matrix to ID
-Matrix::Matrix(int size){
+//width is optional and only needs to be set
+//for non-square matrices
+Matrix::Matrix(int size, int width){
   m_size = size;
-  m_matrix = new float*[size];
-  for(int i = 0; i<size; i++){
-    m_matrix[i] = new float[size];
+  if(width==-1){
+    m_width = size;
+    isSquare = true;
   }
-  // for(int j = 0; j<size;j++){
-  //   for(int k = 0; k< size; k++){
-  //     m_matrix[j][k] = 0;
-  //     if(j==k){
-  //       m_matrix[j][k] = 1;
-  //     }
-  //   }
-  // }
-  setMat();
-cout<<"Successfully made " <<endl;//<<size<<"x"<<size<<" matrix."<<endl;
+  else{
+    m_width = width;
+    isSquare = false;
+  }
+    m_matrix = new float*[m_size];
+    for(int i = 0; i<size; i++){
+      m_matrix[i] = new float[m_width];
+    }
+    setMat();
+
+  cout<<"Successfully made " <<endl;//<<size<<"x"<<size<<" matrix."<<endl;
 }
 
 //good for testing
@@ -49,7 +52,7 @@ cout<<"in printmat"<<endl;
   cout<<"Matrix: "<< endl;
   cout<< "{";
   for (int i = 0; i<m_size; i++){
-    for(int j = 0; j<m_size; j++){
+    for(int j = 0; j<m_width; j++){
       cout<<m_matrix[i][j] <<", ";
     }
     cout<<""<<endl;
@@ -58,6 +61,9 @@ cout<<"in printmat"<<endl;
 }
 
 bool Matrix::isID(){
+  if(!isSquare){
+    return false;
+  }
   for(int i =0; i<m_size; i++){
     for(int j=0; j<m_size; j++){
       if(i==j && m_matrix[i][j]!=1.0){
@@ -74,17 +80,25 @@ bool Matrix::isID(){
 
 //sets the matrix to val at mat[row][col]
 //if called with no params, sets to ID
+//or to all 0's if it's not square
 void Matrix::setMat(int row, int col, float val){
   if (row != -1){
     m_matrix[row][col] = val;
   }
-  else {
+  else if (isSquare){
     for(int i = 0;i<m_size; i++){
       for(int j = 0; j<m_size; j++){
         m_matrix[i][j] = 0;
         if(i==j){
           m_matrix[i][j] = 1;
         }
+      }
+    }
+  }
+  else {
+    for(int i = 0; i<m_size;i++){
+      for(int j = 0; j<m_width; j++){
+        m_matrix[i][j] = 0;
       }
     }
   }
@@ -118,11 +132,6 @@ void Matrix::swapRow(int row1, int row2){
   }
 }
 
-//wait, do i actually need to do this?
-void Matrix::swapCol(int col1, int col2){
-
-
-}
 
 //returns the rref of matrix
 float** Matrix::rref(){

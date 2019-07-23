@@ -26,6 +26,7 @@ Equation::Equation(string eq, int size){
     else if(eq.at(to)=='='){
       m_terms[count] = new Term(eq.substr(frm, to-frm));
       count++;
+      con = stof(eq.substr(to+1, eq.length()-to));
     }
     to++;
   }
