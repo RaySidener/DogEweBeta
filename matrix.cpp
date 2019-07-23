@@ -159,6 +159,7 @@ Matrix* Matrix::rref(){
 
 
   while(i<m_size&&j<m_width){
+      cout<<"i: "<<i<<endl;
       pivot = cp->get(i,j);
       tmp = i+1;
       if(pivot==0){
@@ -177,27 +178,26 @@ Matrix* Matrix::rref(){
         cout<<"Pivot: "<<pivot<<endl;
         pivot = cp->get(i,j);
       }
+      cout<<"pre BYCONST! pivot = "<<pivot<<endl;
       cp->byConst(i,(1/pivot));
       cp->printMat();
       //step 2
-      for(int m = i+1; m<m_size; m++){
+      for(int m = 0; m<m_size; m++){
         front = cp->get(m,j);
-        if(front!=0){
+        if(front!=0 && m!=i){
           cout<<"HERE: "<<endl;
           cout<<"i = "<< i<< endl;
           cout<<"m = "<<m<<endl;
-          cp->byConst(i, (-front), multiples);
+          cp->byConst(i, (-1*front), multiples);
           cp->add(m, multiples);
           //TODO: make add function to add an array to a row of a matrix
           //add(int row, float* array); add(k,multiples)
         }//step 3
-        i++;
-        j++;
         cp->printMat();
       }
+      i++;
+      j++;
     }
-
-
 
 
   return cp;
