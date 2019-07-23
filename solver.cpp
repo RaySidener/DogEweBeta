@@ -57,4 +57,5 @@ void solveEquation(){
     co->setMat(k,size, eqs[k]->con);
   }
   co->printMat();
+  co->rref();
 }

@@ -48,7 +48,6 @@ void Matrix::hello(){
 }
 
 void Matrix::printMat(){
-cout<<"in printmat"<<endl;
   cout<<"Matrix: "<< endl;
   cout<< "{";
   for (int i = 0; i<m_size; i++){
@@ -109,62 +108,97 @@ void Matrix::setMat(int row, int col, float val){
 //otherwise, modify m_matrix
 void Matrix::byConst(int row, float k, float* arr){
   if(arr==NULL){
-    for(int i = 0; i<m_size; i++){
+    cout<<"byConst direct to mat"<<endl;
+    for(int i = 0; i<m_width; i++){
       m_matrix[row][i] *=k;
     }
   }
   else {
-    cout<<"BY CONST METHOD ";
-    for(int i = 0; i<m_size; i++){
+    cout<<"BY CONST: ";
+    for(int i = 0; i<m_width; i++){
       arr[i] =m_matrix[row][i]*k;
-      cout<<", "<<arr[i];
+      cout<<arr[i]<<", ";
     }
   }
 }
 
 //swaps the contents of row1 and row2 in m_matrix
 void Matrix::swapRow(int row1, int row2){
-  float temp;
-  for(int i = 0; i<m_size; i++){
+  float temp;//should the loop be i<m_width?
+  for(int i = 0; i<m_width; i++){
     temp = m_matrix[row1][i];
     m_matrix[row1][i] = m_matrix[row2][i];
     m_matrix[row2][i] = temp;
   }
 }
 
+//adds the elements of the array to the row
+void Matrix::add(int row, float* arr){
+  for(int i = 0; i<m_width; i++){
+    m_matrix[row][i]+=arr[i];
+  }
+}
+
 
 //returns the rref of matrix
-float** Matrix::rref(){
-  //what's the best way to do this? can I actually straight up just
-  //make two new matrices, ie by calling the constructor?
-  float** lMat;
-  lMat = new float*[m_size];
-  float** rMat;
-  rMat = new float*[m_size];
-
-  for(int i = 0; i<m_size; i++){
-    rMat[i] = new float[m_size];
-    lMat[i] = new float[m_size];
-  }
-
-  for(int j = 0; j<m_size;j++){
-    for(int k = 0; k<m_size; k++){
-      rMat[j][k] = 0;
-      lMat[j][k] = m_matrix[j][k];
-      if(j==k){
-        rMat[j][k] = 1;
-      }
+Matrix* Matrix::rref(){
+  Matrix* cp  = new Matrix(m_size, m_width);
+  float pivot;//value of the pivot
+  int tmp;
+  float front;
+  float* multiples = new float[m_width];
+  for(int l = 0; l<m_size;l++){
+    for(int k = 0; k<m_width; k++){
+      cp->setMat(l,k,m_matrix[l][k]);
     }
   }
+  cout<<"copied matrix:"<<endl;
+  cp->printMat();
+  int i = 0;
+  int j = 0;
 
-  //cout<<isID(matrix, size);
-  //while(!(isID(lMat))){
-    //note: won't use methods from solver.cpp in solver.cpp, so
-    //above line won't work. here, we'll do the same moves/multiplies/adds
-    //to rows in lMat and rMat. eventually either lmat==ID or there's an error
-    //(I'll need to add good error handling for systems of equations that
-  //have no solution or multiple solutions)
-//  }
 
-  return rMat;
+  while(i<m_size&&j<m_width){
+      pivot = cp->get(i,j);
+      tmp = i+1;
+      if(pivot==0){
+        while(pivot==0 && tmp<m_size){
+          pivot = cp->get(tmp, j);
+          tmp++;
+        }
+        if(pivot==0){//column is all 0s
+          j++;
+        }
+        else{
+          cp->swapRow(tmp-1,i);
+          cp->printMat();
+        }//step 1
+        //reset pivot
+        cout<<"Pivot: "<<pivot<<endl;
+        pivot = cp->get(i,j);
+      }
+      cp->byConst(i,(1/pivot));
+      cp->printMat();
+      //step 2
+      for(int m = i+1; m<m_size; m++){
+        front = cp->get(m,j);
+        if(front!=0){
+          cout<<"HERE: "<<endl;
+          cout<<"i = "<< i<< endl;
+          cout<<"m = "<<m<<endl;
+          cp->byConst(i, (-front), multiples);
+          cp->add(m, multiples);
+          //TODO: make add function to add an array to a row of a matrix
+          //add(int row, float* array); add(k,multiples)
+        }//step 3
+        i++;
+        j++;
+        cp->printMat();
+      }
+    }
+
+
+
+
+  return cp;
 }
