@@ -1,7 +1,7 @@
 # DogEweBeta
 ## A little like WolfRamAlpha, but the knockoff version
 
-####**What it does now**
+#### **What it does now**
 - Basically, solves systems of linear equations for x equations/variables
   - Prompts user for equation metadata (ie, how many equations/variables?) and equations
   themselves
@@ -10,7 +10,7 @@
   - Prints out a whole bunch of stuff, including the matrix in rref and also
   other things (debugging state of mind)
 
-####**Things I plan to add**
+#### **Things I plan to add**
 - Better formatted output
   - as much as an augmented matrix in rref looks like a beautiful and clear solution to a system of linear equations to *me*, maybe it could be a little easier to read
   - including output for systems with no solutions/multiple solutions
