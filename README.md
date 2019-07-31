@@ -7,12 +7,10 @@
   themselves
   - Creates an augmented matrix representing the system of equations
   - Puts the matrix in reduced row echelon form
-  - Prints out a whole bunch of stuff, including the matrix in rref and also
-  other things (debugging state of mind)
+  - Prints out the solution to the system
 
 #### **Things I plan to add**
 - Better formatted output
-  - as much as an augmented matrix in rref looks like a beautiful and clear solution to a system of linear equations to *me*, maybe it could be a little easier to read
   - including output for systems with no solutions/multiple solutions
 - More user inputs accepted, and error handling for bad input
   - Rearrange equations so they're ordered correctly for the matrix!

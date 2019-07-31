@@ -26,7 +26,6 @@ Matrix::Matrix(int size, int width){
     }
     setMat();
 
-  cout<<"Successfully made " <<endl;//<<size<<"x"<<size<<" matrix."<<endl;
 }
 
 //good for testing
@@ -108,16 +107,13 @@ void Matrix::setMat(int row, int col, float val){
 //otherwise, modify m_matrix
 void Matrix::byConst(int row, float k, float* arr){
   if(arr==NULL){
-    cout<<"byConst direct to mat"<<endl;
     for(int i = 0; i<m_width; i++){
       m_matrix[row][i] *=k;
     }
   }
   else {
-    cout<<"BY CONST: ";
     for(int i = 0; i<m_width; i++){
       arr[i] =m_matrix[row][i]*k;
-      cout<<arr[i]<<", ";
     }
   }
 }
@@ -152,14 +148,11 @@ Matrix* Matrix::rref(){
       cp->setMat(l,k,m_matrix[l][k]);
     }
   }
-  cout<<"copied matrix:"<<endl;
-  cp->printMat();
   int i = 0;
   int j = 0;
 
 
   while(i<m_size&&j<m_width){
-      cout<<"i: "<<i<<endl;
       pivot = cp->get(i,j);
       tmp = i+1;
       if(pivot==0){
@@ -172,28 +165,18 @@ Matrix* Matrix::rref(){
         }
         else{
           cp->swapRow(tmp-1,i);
-          cp->printMat();
         }//step 1
         //reset pivot
-        cout<<"Pivot: "<<pivot<<endl;
         pivot = cp->get(i,j);
       }
-      cout<<"pre BYCONST! pivot = "<<pivot<<endl;
       cp->byConst(i,(1/pivot));
-      cp->printMat();
       //step 2
       for(int m = 0; m<m_size; m++){
         front = cp->get(m,j);
         if(front!=0 && m!=i){
-          cout<<"HERE: "<<endl;
-          cout<<"i = "<< i<< endl;
-          cout<<"m = "<<m<<endl;
           cp->byConst(i, (-1*front), multiples);
           cp->add(m, multiples);
-          //TODO: make add function to add an array to a row of a matrix
-          //add(int row, float* array); add(k,multiples)
         }//step 3
-        cp->printMat();
       }
       i++;
       j++;

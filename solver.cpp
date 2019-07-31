@@ -56,6 +56,11 @@ void solveEquation(){
   for(int k = 0; k<size; k++){
     co->setMat(k,size, eqs[k]->con);
   }
-  co->printMat();
-  co->rref();
+  Matrix* ans = co->rref();
+  char variable;
+  for (int j = 0; j < size; j++){
+    variable = eqs[j]->getTerms()[j]->varName;
+    val = ans->get(j, size);
+    cout << variable << " = " << val << endl;
+  }
 }

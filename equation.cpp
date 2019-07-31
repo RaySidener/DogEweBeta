@@ -9,7 +9,6 @@
 using namespace std;
 
 Equation::Equation(string eq, int size){
-  cout<<"Making equation!"<<endl;
   m_eq = eq;
   m_size = size;
   m_terms = new Term*[m_size];
@@ -18,8 +17,6 @@ Equation::Equation(string eq, int size){
   int count = 0;
   while(to<eq.length()){
     if((eq.at(to)=='+'||eq.at(to)=='-') && to!=0){
-      cout<<"to: "<<to<<"frm: "<< frm<<endl;
-      cout<<"term substr"<<eq.substr(frm, to-frm)<<endl;
       m_terms[count] = new Term(eq.substr(frm, to-frm));
       count++;
       frm = to;
@@ -29,9 +26,7 @@ Equation::Equation(string eq, int size){
       count++;
       frm = to+1;
       to = eq.length();
-      cout<<"substr: "<< eq.substr(frm, to-frm)<<endl;
       con = stof(eq.substr(frm, to-frm));
-      cout<<"to: "<<to<<"frm: "<< frm<<endl;
     }
     to++;
   }
