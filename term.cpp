@@ -13,7 +13,15 @@ Term::Term(string t){
   string t2 = t.substr(0, t.length()-1);
 
   varName = t.at(t.length()-1);
-  coefficient = stof(t2);
+  if(t2=="+"||t2==""){
+    coefficient = 1;
+  }
+  else if(t2=="-"){
+    coefficient = -1;
+  }
+  else {
+    coefficient = stof(t2);
+  }
 }
 
 

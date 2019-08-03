@@ -16,7 +16,6 @@
   - Rearrange equations so they're ordered correctly for the matrix!
   - Handle equations with variables valued at 0!
     - EG, on input 2x+3z=12 within a three-variable system, we have a third variable with a coefficient of 0. So that equation should be stored more like 2x+0y+3z=12
-  - Handle terms with an implied coefficient of 1 (IE x = 1x)!
   - Simplify equations that aren't already fully simplified!
 - other fun mathy features?!
   - simplify expressions?
