@@ -31,11 +31,28 @@ void helloSolver(){
 //  a->hello();
 }
 
+//make sure variables are in the right order and all there
+void alignEQs(Equation** eq, int size){
+  char* vars = new char[size];
+  cout<<"alles gutes"<<endl;
+}
+
 
 //create coefficient matrix based on an array of equations
-//Matrix* makeCoeffMat(Equation**){
-
-//}
+Matrix* makeCoeffMat(Equation** eqs, int size){
+  Matrix* mat = new Matrix(size, size+1);
+  float val;
+  for(int r = 0; r<size; r++){
+    for(int c = 0; c<size; c++){
+      val = eqs[r]->getTerms()[c]->getCoefficient();
+      mat->setMat(r, c, val);
+    }
+  }
+  for(int k = 0; k<size; k++){
+    mat->setMat(k,size, eqs[k]->con);
+  }
+  return mat;
+}
 
 
 void solveEquation(){
@@ -45,19 +62,12 @@ void solveEquation(){
     Equation* x = new Equation(getInputEQ(), size);
     eqs[i] = x;
   }
-  float val;
-  Matrix* co = new Matrix(size, size+1);
-  for(int r = 0; r<size; r++){
-    for(int c = 0; c<size; c++){
-      val = eqs[r]->getTerms()[c]->getCoefficient();
-      co->setMat(r, c, val);
-    }
-  }
-  for(int k = 0; k<size; k++){
-    co->setMat(k,size, eqs[k]->con);
-  }
+  alignEQs(eqs, size);
+  Matrix* co = makeCoeffMat(eqs, size);//new Matrix(size, size+1);
+  co->printMat();
   Matrix* ans = co->rref();
   char variable;
+  float val;
   for (int j = 0; j < size; j++){
     variable = eqs[j]->getTerms()[j]->varName;
     val = ans->get(j, size);

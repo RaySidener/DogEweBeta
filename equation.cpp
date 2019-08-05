@@ -1,5 +1,6 @@
 #include "equation.h"
 #include "term.h"
+#include "helpers.cpp"
 
 #include <iostream>
 #include <fstream>
