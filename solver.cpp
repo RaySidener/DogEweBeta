@@ -31,11 +31,56 @@ void helloSolver(){
 //  a->hello();
 }
 
+char* getCharSet(Equation** eq, int size){
+  char* charSet = new char[size];
+  cout<<"tout bien"<<endl;
+  int count = 0;
+  char toAdd;
+  bool cont;
+  for (int i = 0; i< size; i++){
+    for (int j = 0; j<size; j++){
+      toAdd = eq[i]->getTerms()[j]->varName;
+      //check if charSet has toAdd already
+      cont = false;
+      for (int k = 0; k<size; k++){
+        if(charSet[k]==toAdd){
+          cont = true;
+        }
+      }
+      if (!cont){
+        charSet[count] = toAdd;
+        count++;
+      }
+      if(count==size){
+        return charSet;
+      }
+    }
+  }
+  return charSet;
+}
+
 //make sure variables are in the right order and all there
 void alignEQs(Equation** eq, int size){
-  char* vars = new char[size];
+  char* vars = getCharSet(eq, size);
+  for (int i = 0; i<size; i++){
+    for (int j = 0; j<size; j++){
+      if (eq[i]->containsTerm(vars[j])>=0){
+        //honestly not really sure what to do here... does this work?
+        eq[i]->getTerms()[eq[i]->termsFilled]->varName = vars[j];
+        eq[i]->termsFilled++;
+      }
+      //maybe - put this in a separate loop?
+      //TODO: change containsTerm so it returns index of that
+      if(eq[i]->getTerms()[j]->varName!=vars[j]){//order of variables in equation is out of whack
+        cout<<"oo"<<endl;
+        //use containsTerm to get index in eq[i] of that term
+        //then swapterms(j, index)
+      }
+    }
+  }
   cout<<"alles gutes"<<endl;
 }
+
 
 
 //create coefficient matrix based on an array of equations

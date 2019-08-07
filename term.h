@@ -17,7 +17,6 @@ class Term {
     string m_term;
     char varName;
     bool isNegative;
-  private:
     float coefficient;//coefficient of term not including +/-
 
 };

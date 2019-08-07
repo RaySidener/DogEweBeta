@@ -15,6 +15,9 @@ class Equation {
     void Equation::printEq();
     Term** getTerms(){return m_terms;}
     float con = NULL;
+    int Equation::containsTerm(char var);
+    int termsFilled;//number of terms actually defined
+    void Equation::swapTerms(int i, int j);
 
 
 
