@@ -116,7 +116,7 @@ Matrix* makeCoeffMat(Equation** eqs, int size){
   float val;
   for(int r = 0; r<size; r++){
     for(int c = 0; c<size; c++){
-      val = eqs[r]->getTerms()[c]->getCoefficient();
+      val = eqs[r]->getTerms()[c]->coefficient;
       mat->setMat(r, c, val);
     }
   }

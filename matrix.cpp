@@ -7,9 +7,6 @@
 
 using namespace std;
 
-//initializes m_size and m_matrix to ID
-//width is optional and only needs to be set
-//for non-square matrices
 Matrix::Matrix(int size, int width){
   m_size = size;
   if(width==-1){
@@ -25,7 +22,6 @@ Matrix::Matrix(int size, int width){
       m_matrix[i] = new float[m_width];
     }
     setMat();
-
 }
 
 //good for testing
@@ -75,8 +71,6 @@ bool Matrix::isID(){
   return true;
 }
 
-//given a matrix in rref, does that
-//represent a solution?
 bool Matrix::hasSolutions(){
   for(int i =0; i<m_size; i++){
     for(int j=0; j<m_size; j++){
@@ -91,10 +85,6 @@ bool Matrix::hasSolutions(){
   return true;
 }
 
-
-//sets the matrix to val at mat[row][col]
-//if called with no params, sets to ID
-//or to all 0's if it's not square
 void Matrix::setMat(int row, int col, float val){
   if (row != -1){
     m_matrix[row][col] = val;
@@ -118,9 +108,6 @@ void Matrix::setMat(int row, int col, float val){
   }
 }
 
-//mulitplies row 'row' by k
-//if the 3rd param is included, save result in arr
-//otherwise, modify m_matrix
 void Matrix::byConst(int row, float k, float* arr){
   if(arr==NULL){
     for(int i = 0; i<m_width; i++){
@@ -134,9 +121,8 @@ void Matrix::byConst(int row, float k, float* arr){
   }
 }
 
-//swaps the contents of row1 and row2 in m_matrix
 void Matrix::swapRow(int row1, int row2){
-  float temp;//should the loop be i<m_width?
+  float temp;
   for(int i = 0; i<m_width; i++){
     temp = m_matrix[row1][i];
     m_matrix[row1][i] = m_matrix[row2][i];
@@ -144,7 +130,6 @@ void Matrix::swapRow(int row1, int row2){
   }
 }
 
-//adds the elements of the array to the row
 void Matrix::add(int row, float* arr){
   for(int i = 0; i<m_width; i++){
     m_matrix[row][i]+=arr[i];

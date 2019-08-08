@@ -15,7 +15,10 @@
 using namespace std;
 
 int main(){
-  solveEquation();
-  //helloSolver();
+  cout<<"Welcome to DogEweBeta, a system of equation solver!"<<endl;
+  while(1){
+    solveEquation();
+    cout<<"You can keep going, or hit ctrl-c to quit"<<endl;
+  }
   return 0;
 }

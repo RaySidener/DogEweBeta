@@ -8,6 +8,7 @@
 using namespace std;
 
 Term::Term(string t){
+  //for equations that have fewer terms than expected
   if (t=="EMPTY"){
     isNegative = false;
     m_term = t;

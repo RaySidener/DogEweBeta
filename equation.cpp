@@ -15,6 +15,7 @@ Equation::Equation(string eq, int size){
   int frm = 0;
   int to = 0;
   int count = 0;
+
   while(to<eq.length()){
     if((eq.at(to)=='+'||eq.at(to)=='-') && to!=0){
       m_terms[count] = new Term(eq.substr(frm, to-frm));
@@ -30,12 +31,12 @@ Equation::Equation(string eq, int size){
     }
     to++;
   }
+  
   termsFilled = count;
   for (int i = count; i<size; i++){
-    m_terms[i] = new Term("EMPTY");
+    m_terms[i] = new Term("EMPTY"); //fills empty spots with empty terms
   }
 }
-
 
 void Equation::printEq(){
   cout<<m_eq<<endl;
