@@ -45,6 +45,7 @@ void Equation::printEq(){
 }
 
 void Equation::swapTerms(int i, int j){
+  cout<< "Swapping terms "<< i<<", "<< j<<endl;
   char tmp = m_terms[i]->varName;
   m_terms[i]->varName = m_terms[j]->varName;
   m_terms[j]->varName = tmp;

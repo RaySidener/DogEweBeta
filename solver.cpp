@@ -61,20 +61,40 @@ char* getCharSet(Equation** eq, int size){
 
 //make sure variables are in the right order and all there
 void alignEQs(Equation** eq, int size){
-  char* vars = getCharSet(eq, size);
+  char* vars = getCharSet(eq, size);//standard order of variables in eqs
+  bool ordered;
+  int toSwap;
+  int swapWith;
+//adds 0 terms to equations
   for (int i = 0; i<size; i++){
     for (int j = 0; j<size; j++){
-      if (eq[i]->containsTerm(vars[j])>=0){
+      if (eq[i]->containsTerm(vars[j])<0){
         //honestly not really sure what to do here... does this work?
         eq[i]->getTerms()[eq[i]->termsFilled]->varName = vars[j];
         eq[i]->termsFilled++;
       }
+    }
+  }
+
+//rearranges terms as needed in equation
+  for (int k = 0; k<size; k++){
+    for(int l = 0; l<size; l++){
       //maybe - put this in a separate loop?
       //TODO: change containsTerm so it returns index of that
-      if(eq[i]->getTerms()[j]->varName!=vars[j]){//order of variables in equation is out of whack
+      if(eq[k]->getTerms()[l]->varName!=vars[l]){//order of variables in equation is out of whack
         cout<<"oo"<<endl;
-        //use containsTerm to get index in eq[i] of that term
-        //then swapterms(j, index)
+        ordered = false;
+        toSwap = l;
+        while(!ordered){
+          //use containsTerm to get index in eq[i] of that term
+          swapWith = eq[k]->containsTerm(vars[l]);
+          //then swapterms(j, index)
+          //now check- is index in the right place?
+          //if not, swap so that it is in the right place
+          eq[k]->swapTerms(toSwap, swapWith);
+          //if index is in the right place
+          ordered = true;
+        }
       }
     }
   }
