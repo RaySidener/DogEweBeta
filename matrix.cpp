@@ -75,6 +75,22 @@ bool Matrix::isID(){
   return true;
 }
 
+//given a matrix in rref, does that
+//represent a solution?
+bool Matrix::hasSolutions(){
+  for(int i =0; i<m_size; i++){
+    for(int j=0; j<m_size; j++){
+      if(i==j && m_matrix[i][j]!=1.0){
+        return false;
+      }
+      if(i!=j && m_matrix[i][j]!=0){
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 
 //sets the matrix to val at mat[row][col]
 //if called with no params, sets to ID

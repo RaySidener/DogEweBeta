@@ -33,20 +33,24 @@ void helloSolver(){
 
 char* getCharSet(Equation** eq, int size){
   char* charSet = new char[size];
-  cout<<"tout bien"<<endl;
   int count = 0;
   char toAdd;
   bool cont;
   for (int i = 0; i< size; i++){
     for (int j = 0; j<size; j++){
       toAdd = eq[i]->getTerms()[j]->varName;
-      //check if charSet has toAdd already
       cont = false;
-      for (int k = 0; k<size; k++){
-        if(charSet[k]==toAdd){
-          cont = true;
+      if(toAdd=='.'){
+        cont = true;
+      }
+      else { //check if charSet has toAdd already
+        for (int k = 0; k<size; k++){
+          if(charSet[k]==toAdd){
+            cont = true;
+          }
         }
       }
+
       if (!cont){
         charSet[count] = toAdd;
         count++;
@@ -75,30 +79,33 @@ void alignEQs(Equation** eq, int size){
       }
     }
   }
-
 //rearranges terms as needed in equation
   for (int k = 0; k<size; k++){
     for(int l = 0; l<size; l++){
       //maybe - put this in a separate loop?
       //TODO: change containsTerm so it returns index of that
       if(eq[k]->getTerms()[l]->varName!=vars[l]){//order of variables in equation is out of whack
-        cout<<"oo"<<endl;
         ordered = false;
         toSwap = l;
         while(!ordered){
           //use containsTerm to get index in eq[i] of that term
-          swapWith = eq[k]->containsTerm(vars[l]);
+          swapWith = eq[k]->containsTerm(vars[toSwap]);
           //then swapterms(j, index)
           //now check- is index in the right place?
           //if not, swap so that it is in the right place
           eq[k]->swapTerms(toSwap, swapWith);
           //if index is in the right place
-          ordered = true;
+          if (eq[k]->getTerms()[swapWith]->varName==vars[swapWith]){
+            ordered = true;
+          }
+          else {
+            toSwap = swapWith;
+          }
+
         }
       }
     }
   }
-  cout<<"alles gutes"<<endl;
 }
 
 
@@ -128,14 +135,18 @@ void solveEquation(){
     eqs[i] = x;
   }
   alignEQs(eqs, size);
-  Matrix* co = makeCoeffMat(eqs, size);//new Matrix(size, size+1);
-  co->printMat();
+  Matrix* co = makeCoeffMat(eqs, size);
   Matrix* ans = co->rref();
-  char variable;
-  float val;
-  for (int j = 0; j < size; j++){
-    variable = eqs[j]->getTerms()[j]->varName;
-    val = ans->get(j, size);
-    cout << variable << " = " << val << endl;
+  if (ans->hasSolutions()){
+    char variable;
+    float val;
+    for (int j = 0; j < size; j++){
+      variable = eqs[j]->getTerms()[j]->varName;
+      val = ans->get(j, size);
+      cout << variable << " = " << val << endl;
+    }
+  }
+  else{
+   cout<< "No solution :("<<endl;
   }
 }

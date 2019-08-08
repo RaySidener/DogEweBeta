@@ -1,6 +1,5 @@
 #include "equation.h"
 #include "term.h"
-#include "helpers.cpp"
 
 #include <iostream>
 #include <fstream>
@@ -33,10 +32,8 @@ Equation::Equation(string eq, int size){
   }
   termsFilled = count;
   for (int i = count; i<size; i++){
-    cout<<"prepping yeet..."<<endl;
-    m_terms[count] = new Term("EMPTY");
+    m_terms[i] = new Term("EMPTY");
   }
-  cout<<"YEET"<<endl;
 }
 
 
@@ -45,7 +42,6 @@ void Equation::printEq(){
 }
 
 void Equation::swapTerms(int i, int j){
-  cout<< "Swapping terms "<< i<<", "<< j<<endl;
   char tmp = m_terms[i]->varName;
   m_terms[i]->varName = m_terms[j]->varName;
   m_terms[j]->varName = tmp;
