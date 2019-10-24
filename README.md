@@ -13,6 +13,5 @@
 #### **Things I might add someday**
 
 - other fun mathy features (maybe)
-  - simplify expressions and equations that aren't fully simplified?
-  - solve equations with one variable?
-  - solve *quadratics??*??? (maybe someday)
+  - simplify expressions and equations that aren't fully simplified? (in progress!)
+  - solve *quadratics??*??? (maybe someday, but probably not)
